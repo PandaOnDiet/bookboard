@@ -2,23 +2,23 @@ import { atom, read, update } from 'claude-code'
 import type { EngineInterface as Engine, Register } from 'claude-code'
 
 const PANE = 'bookboard'
-const TOOL = 'mcp__bookboard-pane__board'
+const TOOL = 'mcp__bookboard__board'
 const SECTIONS = ['Pinned notes', 'To do', 'In progress', 'Parked', 'Done'] as const
 type Section = typeof SECTIONS[number]
 const EMPTY = '# Board\n\n' + SECTIONS.map(s => '## ' + s + '\n').join('\n')
 
-const board = atom({ plugin: 'bookboard-pane', key: 'board' } as const, '', { shape: 'board-1' })
-const project = atom({ plugin: 'bookboard-pane', key: 'project' } as const, '', { shape: 'project-1' })
+const board = atom({ plugin: 'bookboard', key: 'board' } as const, '', { shape: 'board-1' })
+const project = atom({ plugin: 'bookboard', key: 'project' } as const, '', { shape: 'project-1' })
 // The workspace's folders, found once per session (see findFolders).
-const folders = atom({ plugin: 'bookboard-pane', key: 'folders' } as const, [] as string[], { shape: 'folders-1' })
+const folders = atom({ plugin: 'bookboard', key: 'folders' } as const, [] as string[], { shape: 'folders-1' })
 // What is typed in each field, kept as it is typed: VS Code hands onSubmit an empty value.
-const drafts = atom({ plugin: 'bookboard-pane', key: 'drafts' } as const, {} as Record<string, string>, { shape: 'drafts-1' })
+const drafts = atom({ plugin: 'bookboard', key: 'drafts' } as const, {} as Record<string, string>, { shape: 'drafts-1' })
 // Claude's final reply of each turn (newest last), so its buttons go under that reply only.
 // Items whose long text is shown whole ("more" pressed), by section and place.
-const expanded = atom({ plugin: 'bookboard-pane', key: 'expanded' } as const, [] as string[], { shape: 'expanded-1' })
+const expanded = atom({ plugin: 'bookboard', key: 'expanded' } as const, [] as string[], { shape: 'expanded-1' })
 // Which half of the panel is shown: the tasks or the pinned notes.
-const tab = atom({ plugin: 'bookboard-pane', key: 'tab' } as const, 'todo' as 'todo' | 'notes', { shape: 'tab-1' })
-const replies = atom({ plugin: 'bookboard-pane', key: 'replies' } as const, [] as string[], { shape: 'replies-1' })
+const tab = atom({ plugin: 'bookboard', key: 'tab' } as const, 'todo' as 'todo' | 'notes', { shape: 'tab-1' })
+const replies = atom({ plugin: 'bookboard', key: 'replies' } as const, [] as string[], { shape: 'replies-1' })
 
 const clean = (p: string) => p.replace(/\\/g, '/').replace(/\/+$/, '')
 const same = (a: string, b: string) => clean(a).toLowerCase() === clean(b).toLowerCase()

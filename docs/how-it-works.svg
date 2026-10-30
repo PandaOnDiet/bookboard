@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <title>How Bookboard works: Claude, the panel and you all read and write one board file</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="880" height="400" rx="16" fill="#f8fafc"/>
+
+  <!-- the board file -->
+  <rect x="330" y="140" width="220" height="120" rx="12" fill="#0f172a"/>
+  <text x="440" y="178" text-anchor="middle" font-size="13" fill="#94a3b8" font-family="ui-monospace, Consolas, monospace">.board/board.md</text>
+  <text x="440" y="206" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">One Markdown file</text>
+  <text x="440" y="230" text-anchor="middle" font-size="13" fill="#cbd5e1">notes · to do · in progress</text>
+  <text x="440" y="248" text-anchor="middle" font-size="13" fill="#cbd5e1">parked · done</text>
+
+  <!-- Claude -->
+  <rect x="30" y="40" width="230" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="50" y="74" font-size="16" font-weight="700" fill="#c2410c">Claude</text>
+  <text x="50" y="100" font-size="13" fill="#334155">calls the <tspan font-family="ui-monospace, Consolas, monospace">board</tspan> tool:</text>
+  <text x="50" y="120" font-size="13" fill="#334155">list · add · note · move · unpin</text>
+  <text x="50" y="146" font-size="13" fill="#64748b">starts a task when it begins,</text>
+  <text x="50" y="164" font-size="13" fill="#64748b">ticks it when the work is done</text>
+
+  <!-- every prompt -->
+  <rect x="30" y="230" width="230" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="50" y="264" font-size="16" font-weight="700" fill="#1d4ed8">Every prompt</text>
+  <text x="50" y="290" font-size="13" fill="#334155">carries a short summary</text>
+  <text x="50" y="310" font-size="13" fill="#334155">of the board as it stands,</text>
+  <text x="50" y="336" font-size="13" fill="#64748b">so Claude works from the</text>
+  <text x="50" y="354" font-size="13" fill="#64748b">real status, not memory</text>
+
+  <!-- panel -->
+  <rect x="620" y="40" width="230" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="640" y="74" font-size="16" font-weight="700" fill="#047857">The panel</text>
+  <text x="640" y="100" font-size="13" fill="#334155">To do and Notes tabs</text>
+  <text x="640" y="120" font-size="13" fill="#334155">Start · Done · Park buttons</text>
+  <text x="640" y="146" font-size="13" fill="#64748b">redraws the moment the</text>
+  <text x="640" y="164" font-size="13" fill="#64748b">file changes</text>
+
+  <!-- you -->
+  <rect x="620" y="230" width="230" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="640" y="264" font-size="16" font-weight="700" fill="#7c3aed">You</text>
+  <text x="640" y="290" font-size="13" fill="#334155">type a task or a note,</text>
+  <text x="640" y="310" font-size="13" fill="#334155">or press Note / Task under</text>
+  <text x="640" y="330" font-size="13" fill="#334155">a reply; slash commands</text>
+  <text x="640" y="354" font-size="13" fill="#64748b">or edit the file by hand</text>
+
+  <!-- arrows -->
+  <path d="M262 112 C300 112 300 168 326 172" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)" marker-start="url(#a)"/>
+  <path d="M326 228 C300 232 300 290 264 292" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M554 172 C580 168 580 112 616 108" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M616 292 C580 290 580 232 554 228" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+</svg>

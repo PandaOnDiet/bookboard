@@ -33,7 +33,7 @@ If the file does not exist, create it with exactly these five sections, empty.
 
 ## Use the board tool first
 
-When the `mcp__bookboard-pane__board` tool is listed, change the board only through it (`list`, `add`, `note`, `move` with `to`, `unpin`), naming an item by a few of its words (`match`). It keeps the shape below, and the Bookboard panel updates at once. Each prompt already carries the board as it stands; read it before saying what is open. Edit the file by hand only when the tool is not there.
+When the `mcp__bookboard__board` tool is listed, change the board only through it (`list`, `add`, `note`, `move` with `to`, `unpin`), naming an item by a few of its words (`match`). It keeps the shape below, and the Bookboard panel updates at once. Each prompt already carries the board as it stands; read it before saying what is open. Edit the file by hand only when the tool is not there.
 
 Titles: short and concrete, one line, the key words in **bold** (for example `Fix **sign-in redirect** losing \`returnTo\``). Never paste a whole reply as a title.
 

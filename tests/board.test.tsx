@@ -1,7 +1,7 @@
 import { expect, test } from 'claude-code/testing'
 
 const PANE = {
-  plugin: 'bookboard-pane',
+  plugin: 'bookboard',
   component: 'Pane',
   requestId: 'bookboard',
   surface: 'vscode',
@@ -17,7 +17,7 @@ function engine(on: any, files: Record<string, string>) {
   files['C:/AppData/Code/User/workspaceStorage/abc/workspace.json'] = JSON.stringify({ workspace: 'file:///D%3A/Work/Combined.code-workspace' })
   files['D:/Work/Combined.code-workspace'] = JSON.stringify({ folders: [{ path: 'D:/Proj' }, { path: '../Other' }] })
   on('command.register', () => ({ value: {} }))
-  on('tool.register', () => ({ value: { tool: 'mcp__bookboard-pane__board' } }))
+  on('tool.register', () => ({ value: { tool: 'mcp__bookboard__board' } }))
   on('ui.open', () => { pane.isOpen = true; return { value: { isPlaced: true } } })
   on('ui.close', () => { pane.isOpen = false; return { value: undefined } })
   on('ui.panes', () => ({ value: pane.isOpen ? [{ id: 'bookboard', title: 'Bookboard', isShown: true, isFocused: false, isPlaced: true }] : [] }))
@@ -67,7 +67,7 @@ test('the last reply gets Note, Task and a Board button that closes and reopens 
   await $.session.start({ cwd: 'D:/Proj', surface: 'vscode', isInteractive: true })
   await $.turn.complete({ reason: 'answer', answer: 'Use the cache  for reads', durationMs: 1, isAborted: false } as any)
 
-  const reply = await $.ui.mount({ plugin: 'bookboard-pane', component: 'AssistantMessage', surface: 'vscode', props: { text: 'Use the cache  for reads', isFirstOfReply: true } } as any)
+  const reply = await $.ui.mount({ plugin: 'bookboard', component: 'AssistantMessage', surface: 'vscode', props: { text: 'Use the cache  for reads', isFirstOfReply: true } } as any)
   expect((await reply.find({ key: 'toggle' }))?.text).toBe('📋 Close board')
   await reply.press({ key: 'toggle' })
   expect(pane.isOpen).toBe(false)
@@ -83,7 +83,7 @@ test('the last reply gets Note, Task and a Board button that closes and reopens 
   await panel.unmount()
 
   // An older block that is not a final reply gets no buttons.
-  const other = await $.ui.mount({ plugin: 'bookboard-pane', component: 'AssistantMessage', surface: 'vscode', props: { text: 'Looking at the files', isFirstOfReply: true } } as any)
+  const other = await $.ui.mount({ plugin: 'bookboard', component: 'AssistantMessage', surface: 'vscode', props: { text: 'Looking at the files', isFirstOfReply: true } } as any)
   expect(await other.find({ key: 'note:0' })).toBeFalsy()
   await other.unmount()
 })
@@ -138,7 +138,7 @@ test('Claude reads and changes the board through its own tool, and the panel fol
   engine(on, files)
   await $.session.start({ cwd: 'D:/Proj', surface: 'vscode', isInteractive: true })
   const ui = await $.ui.mount(PANE)
-  const TOOL = 'mcp__bookboard-pane__board'
+  const TOOL = 'mcp__bookboard__board'
   const listed = await $.tool.call({ tool: TOOL, action: 'list' } as any)
   expect(JSON.stringify(listed)).toContain('Write spec')
   await $.tool.call({ tool: TOOL, action: 'add', title: 'Fix login' } as any)
@@ -159,7 +159,7 @@ test('every prompt carries the board as it stands, so Claude knows the real stat
   const ctx = ((sent as any).context ?? []).join('\n')
   expect(ctx).toContain('In progress: Ship v2')
   expect(ctx).toContain('To do: Write spec')
-  expect(ctx).toContain('mcp__bookboard-pane__board')
+  expect(ctx).toContain('mcp__bookboard__board')
 })
 
 test('a shell command that writes the board refreshes the panel', async ($, on) => {
@@ -180,7 +180,7 @@ test('a reply sent to a note keeps its keywords and drops list and heading marks
   const reply = '## Plan\n\n- **Cache** the `reads` first.\n- Then retry writes.'
   await $.session.start({ cwd: 'D:/Proj', surface: 'vscode', isInteractive: true })
   await $.turn.complete({ reason: 'answer', answer: reply, durationMs: 1, isAborted: false } as any)
-  const msg = await $.ui.mount({ plugin: 'bookboard-pane', component: 'AssistantMessage', surface: 'vscode', props: { text: reply, isFirstOfReply: true } } as any)
+  const msg = await $.ui.mount({ plugin: 'bookboard', component: 'AssistantMessage', surface: 'vscode', props: { text: reply, isFirstOfReply: true } } as any)
   await msg.press({ key: 'note:0' })
   const panel = await $.ui.mount(PANE)
   expect((await panel.find({ key: 'newnote' }))?.props.value).toBe('Plan: **Cache** the `reads` first. Then retry writes.')
@@ -214,7 +214,7 @@ test('the panel switches between a Notes tab and a To do tab', async ($, on) => 
 test('the board tool answers in plain text, as the real engine requires', async ($, on) => {
   engine(on, { [BOARD]: START })
   await $.session.start({ cwd: 'D:/Proj', surface: 'vscode', isInteractive: true })
-  const ran: any = await $.tool.call({ tool: 'mcp__bookboard-pane__board', action: 'list' } as any)
+  const ran: any = await $.tool.call({ tool: 'mcp__bookboard__board', action: 'list' } as any)
   expect(typeof ran.result).toBe('string')
   expect(ran.result).toContain('To do: Write spec')
 })
@@ -223,7 +223,7 @@ test('a title with a dash stays whole; unparking drops only the park reason', as
   const files: Record<string, string> = { [BOARD]: START }
   engine(on, files)
   await $.session.start({ cwd: 'D:/Proj', surface: 'vscode', isInteractive: true })
-  const TOOL = 'mcp__bookboard-pane__board'
+  const TOOL = 'mcp__bookboard__board'
   await $.tool.call({ tool: TOOL, action: 'add', title: 'MCP server — next release' } as any)
   expect(files[BOARD]).toContain('- [ ] MCP server — next release _(added ')
   await $.tool.call({ tool: TOOL, action: 'move', match: 'write spec', to: 'Parked', reason: 'waiting on design' } as any)
@@ -250,7 +250,7 @@ test('workspace folders are found on macOS and Linux too', async ($, on) => {
   // The test host runs on Windows and puts its drive in front of /home; a Linux machine does not.
   const at = (p: string) => p.replace(/\\/g, '/').replace(/^[A-Za-z]:(?=\/home\/)/, '')
   on('command.register', () => ({ value: {} }))
-  on('tool.register', () => ({ value: { tool: 'mcp__bookboard-pane__board' } }))
+  on('tool.register', () => ({ value: { tool: 'mcp__bookboard__board' } }))
   on('ui.open', () => ({ value: { isPlaced: true } }))
   on('session.surfaces', () => ({ value: ['vscode'] }))
   on('session.root', () => ({ value: '/home/p/proj' }))

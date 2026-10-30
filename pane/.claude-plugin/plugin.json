@@ -1,1 +1,0 @@
-{ "name": "bookboard-pane", "displayName": "Bookboard panel", "version": "0.8.0", "author": { "name": "PandaOnDiet" }, "description": "Shows the project's .board/board.md (pinned notes and tasks) in a panel beside the chat", "types": "./types/index.d.ts", "icon": "./.claude-plugin/icon.png" }
