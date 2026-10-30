@@ -31,6 +31,12 @@ Bookboard keeps that status in one plain Markdown file per project,
   and Park buttons, and redraws the moment anything changes the file.
 - **Pinned notes are standing instructions** for that project, and Claude follows them.
 
+<p align="center">
+  <img src="docs/preview.svg" alt="VS Code with a Claude Code chat on the left and the Bookboard panel on the right, showing In progress, To do, Parked and Done cards" width="100%">
+  <br>
+  <sub>Illustration drawn from the panel's code (same labels, buttons and layout), with example content.</sub>
+</p>
+
 ## How it works
 
 <p align="center">
