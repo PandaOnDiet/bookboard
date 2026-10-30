@@ -1,0 +1,8 @@
+{
+  "name": "bookboard",
+  "owner": { "name": "PandaOnDiet" },
+  "plugins": [
+    { "name": "bookboard", "source": "./" },
+    { "name": "bookboard-pane", "source": "./pane" }
+  ]
+}

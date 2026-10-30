@@ -1,0 +1,6 @@
+# Your own boards stay local.
+.board/
+*.log
+.DS_Store
+.claude-plugin/types/
+pane/.claude-plugin/types/

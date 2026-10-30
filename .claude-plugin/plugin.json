@@ -1,0 +1,8 @@
+{
+  "name": "bookboard",
+  "displayName": "Bookboard",
+  "version": "0.4.0",
+  "description": "Pinned notes and a task board (To do, In progress, Parked, Done) per project, kept in .board/board.md. Same in the Claude Code CLI and the VS Code extension.",
+  "author": { "name": "PandaOnDiet" },
+  "icon": "./.claude-plugin/icon.png"
+}
